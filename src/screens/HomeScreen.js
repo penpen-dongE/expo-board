@@ -24,7 +24,6 @@ export default class HomeScreen extends Component {
         }
     }
 
-
     createBoard(title, content) {
         const item = {
             title: title,
@@ -36,8 +35,33 @@ export default class HomeScreen extends Component {
             board: this.state.board.concat(item),
             lastKey: this.state.lastKey + 1
         });
-
     }
+
+    editBoard(boardKey, title, content) {
+        const newBoard = this.state.board.map((value, index) => {
+            if (boardKey == value.key) {
+                return {
+                    title: title,
+                    content: content,
+                    key: value.key
+                };
+            }
+            return value;
+        });
+        this.setState({ board: newBoard });
+    }
+
+    removeBoard(boardKey) {
+        const newBoard = this.state.board.filter((value, index) => {
+            if (value.key != boardKey) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+        this.setState({ board: newBoard });
+    };
+
 
     render() {
         return (
@@ -52,7 +76,11 @@ export default class HomeScreen extends Component {
 
                 </View>
                 <View style={{ width: "100%", flex: 1, borderTopWidth: 1 }}>
-                    <BoardList board={this.state.board} {...this.props} />
+                    <BoardList board={this.state.board}
+                        removeFunc={this.removeBoard.bind(this)}
+                        editFunc={this.editBoard.bind(this)}
+                        {...this.props} />
+
                 </View>
             </View>
         );

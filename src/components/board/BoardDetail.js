@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Button } from 'react-native';
 
 export default class BoardDetail extends Component {
     static defaultProps = {
@@ -9,12 +9,12 @@ export default class BoardDetail extends Component {
 
     render() {
         return (
-            <View>
-                <View style={{ marginTop: 50, padding: 20 }}>
+            <View style={{ alignItem: "center" }}>
+                <View style={{ marginTop: 20, padding: 10, borderWidth: 1 }}>
                     {/*제목 */}
                     <Text style={{ fontWeight: "bold", fontSize: 20 }}>{this.props.title}</Text>
                 </View>
-                <View style={{ borderWidth: 1, flex: 1, padding: 10, marginTop: 20 }}>
+                <View style={{ marginTop: 20, padding: 10, borderWidth: 1, height: 200 }}>
                     {/*내용 */}
                     <Text >{this.props.content}</Text>
                 </View>
