@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import BoardCreate from '../components/board/BoardCreate';
-
+import BoardCreateContainer from '../containers/BoardCreateContainer';
+import BoardListContainer from '@containers/BoardListContainer';
 
 export default class BoardCreateScreen extends Component {
 
@@ -15,7 +16,8 @@ export default class BoardCreateScreen extends Component {
         return (
             <View style={{ alignItem: "center" }}>
                 <Text style={{ fontSize: 25 }}> 글 작성 </Text>
-                <BoardCreate createFunc={this.createFunc} {...this.props} />
+                {/*<BoardCreate createFunc={this.createFunc} {...this.props} />*/}
+                <BoardCreateContainer />
             </View>
         );
     }

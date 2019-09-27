@@ -11,7 +11,7 @@ import {
     createBoard,
     deleteBoard,
     editBoard
-} from "./action";
+} from "./actions";
 
 /* 3. 초기 상태 정의 (defaultState) */
 
@@ -46,8 +46,46 @@ function boardApp(state = initialState, action) {
             });
         case CREATE_BOARD:
             return Object.assign({}, state, {
-                board: state.board.concat(action.payload)
+                board: state.board.concat({
+                    title: action.payload.title,
+                    content: action.payload.content,
+                    key: String(state.lastBoardId)
+                }),
+                lastBoardId: state.lastBoardId + 1
             });
+        case EDIT_BOARD:
+            return Object.assign({}, state, {
+                board: state.board.map((value, index) => 
+                if (action.payload.key == value.key) {
+                    return {
+                        title: action.payload.title,
+                        content: action.payload.content,
+                        key: value.key
+                    };
+
+                } else {
+                    return value;
+                }
+                })
+          
+        case DELETE_BOARD:
+                return Object.assign({}, state, {
+                    board: this.state.board.filter((value, index) => {
+                        if (value.key == action.payload.boardId) {
+                            return false
+                        }
+                        return true;
+                    })
+                })
+
+            }
+        // case INITIAL_BOARD:
+        //     return Object.assign({}, state, {
+        //         board: state.board.concat({
+        //             title: "",
+        //             content: ""
+        //         })
+        //     });
         default:
             return state;
     }
